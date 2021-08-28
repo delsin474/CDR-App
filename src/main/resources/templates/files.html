@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+</head>
+
+<body>
+
+    <div class="container-fluid" layout:fragment="content">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row page-titles">
+            <div class="col-md-5 col-8 align-self-center">
+                <h3 class="text-themecolor m-b-0 m-t-0">List of File</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="home">Home</a></li>
+                    <li class="breadcrumb-item active">Files</li>
+                </ol>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- Row -->
+        <div class="row">
+            <!-- Column -->
+            <div class="col-lg-8 col-md-7">
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">Files</h4>
+                        <h6 class="card-subtitle">List of Files</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>File Name</th>
+                                        <th>File Extension</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="file,iterationStatus : ${files}">
+                                        <tr>
+                                            <td th:text=${iterationStatus.count}></td>
+                                            <td th:text=${file.fileName}></td>
+                                            <td th:text=${file.fileExtension}></td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-8 col-xlg-9 col-md-7">
+                <div class="card">
+                    <div class="card-block">
+                        <form action="#" method="POST" class="form-horizontal form-material" th:action="@{/files}"
+                            th:object="${fileFormData}">
+                            <div class="form-group">
+                                <label for="fileName" class="col-md-12">File Name</label>
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control form-control-line" name="fileName"
+                                        id="fileName">
+                                </div>
+                                <small class="text-danger-padded" th:if="${#fields.hasErrors('fileName')}"></small>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success">Parse File</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+        </div>
+        <!-- Row -->
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+</body>
+
+</html>

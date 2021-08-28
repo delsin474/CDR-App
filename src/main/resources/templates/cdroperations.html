@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid" layout:fragment="content">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row page-titles">
+            <div class="col-md-5 col-8 align-self-center">
+                <h3 class="text-themecolor m-b-0 m-t-0">CDR Analysis</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="home">Home</a></li>
+                    <li class="breadcrumb-item active">CDR Analysis</li>
+                </ol>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- Row -->
+        <div class="row">
+            <!-- column -->
+            <div class="col-lg-5 col-xlg-9 col-md-7">
+                <div class="card">
+                    <div class="card-block">
+                        <form action="#" method="GET" class="form-horizontal form-material"
+                            th:action="@{/getanumhighestduration}">
+                            <label for="anumHighestDuration" class="col-md-12">Get ANUM with Highest Duration</label>
+                            <div class="col-md-12" th:if="${highestDurationAnum != null }">
+                                <label class="col-md-12">ANUM with Highest Duration : </label>
+                                <label class="col-md-12">[[${highestDurationAnum}]]</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success">Get ANUM</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-xlg-9 col-md-7">
+                <div class="card">
+                    <div class="card-block">
+                        <form action="#" method="GET" class="form-horizontal form-material"
+                            th:action="@{/getanumhighestchargebyday}">
+                            <label for="anumHighestDuration" class="col-md-12">Get the ANUM that made the highest charge
+                                per day</label>
+                            <div class="col-md-12" th:if="${not #lists.isEmpty(anumHighestCharge)}">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>ANUM</th>
+                                                <th>Max Charge</th>
+                                                <th>Start Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <th:block th:each="anumi,iterationStatus : ${anumHighestCharge}">
+                                                <tr>
+                                                    <td th:text=${iterationStatus.count}></td>
+                                                    <td th:text=${anumi.anum}></td>
+                                                    <td th:text=${anumi.maxcharge}></td>
+                                                    <td th:text=${anumi.startdate}></td>
+                                                </tr>
+                                            </th:block>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success">Get ANUM</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-xlg-9 col-md-7">
+                <div class="card">
+                    <div class="card-block">
+                        <form action="#" method="GET" class="form-horizontal form-material"
+                            th:action="@{/getservicehighestchargebyday}">
+                            <label for="anumHighestDuration" class="col-md-12">Get Service Type that made the highest charge
+                                per day</label>
+                            <div class="col-md-12" th:if="${not #lists.isEmpty(serviceCharges)}">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Service Type</th>
+                                                <th>Max Charge</th>
+                                                <th>Start Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <th:block th:each="servicechargei,iterationStatus : ${serviceCharges}">
+                                                <tr>
+                                                    <td th:text=${iterationStatus.count}></td>
+                                                    <td th:text=${servicechargei.servicetype}></td>
+                                                    <td th:text=${servicechargei.maxcharge}></td>
+                                                    <td th:text=${servicechargei.startdate}></td>
+                                                </tr>
+                                            </th:block>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success">Get ANUM</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-xlg-9 col-md-7">
+                <div class="card">
+                    <div class="card-block">
+                        <form action="#" method="GET" class="form-horizontal form-material"
+                            th:action="@{/generatecdroutjson}">
+                            <label for="anumHighestDuration" class="col-md-12">Generate CDROUT in CDROutput
+                                Folder</label>
+                            <div class="col-md-12" th:if="${isSuccess}">
+                                <label class="col-md-12">CDROUT Generation Success</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success">Generate CDROUT</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <form action="#" method="POST" class="form-horizontal form-material" th:action="@{/getvolumebydate}"
+                    th:object="${dateFormData}">
+                    <div class="form-group">
+                        <label for="date" class="col-md-12">Volume on Date</label>
+                        <div class="col-md-12">
+                            <input type="date" class="form-control form-control-line" name="date" id="date"
+                                th:value="${#dates.format(dateDebut, 'yyyy-MM-dd')}">
+                        </div>
+                        <div class="col-md-12" th:if="${volumeOnDate != null }">
+                            <label class="col-md-12">Volume on Date : </label>
+                            <label class="col-md-12">[[${volumeOnDate}]]</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">Get Volume</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Row -->
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+
+</body>
+
+</html>

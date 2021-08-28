@@ -1,0 +1,19 @@
+package com.rakuten.springboot.cdr.controller.v1.command;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+/**
+ * Created by Mohit Chandak
+ */
+@Data
+@Accessors(chain = true)
+public class FileFormCommand {
+    @NotBlank
+    @Size(min = 5, max = 100)
+    private String fileName;
+    
+}
